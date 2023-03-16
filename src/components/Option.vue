@@ -45,19 +45,35 @@ const Option = {
         "vue-treeselect__option--hide": !this.shouldShow,
       };
 
-      return (
-        <div
-          class={optionClass}
-          onMouseenter={this.handleMouseEnterOption}
-          data-id={node.id}
-        >
-          {this.renderArrow()}
-          {this.renderLabelContainer([
-            this.renderCheckboxContainer([this.renderCheckbox()]),
-            this.renderLabel(),
-          ])}
-        </div>
-      );
+      if (node.raw.arrowPos === "right") {
+        return (
+          <div
+            class={optionClass}
+            onMouseenter={this.handleMouseEnterOption}
+            data-id={node.id}
+          >
+            {this.renderLabelContainer([
+              this.renderCheckboxContainer([this.renderCheckbox()]),
+              this.renderLabel(),
+            ])}
+            {this.renderArrow()}
+          </div>
+        );
+      } else if (!node.raw.arrowPos || node.raw.arrowPos === "left") {
+        return (
+          <div
+            class={optionClass}
+            onMouseenter={this.handleMouseEnterOption}
+            data-id={node.id}
+          >
+            {this.renderArrow()}
+            {this.renderLabelContainer([
+              this.renderCheckboxContainer([this.renderCheckbox()]),
+              this.renderLabel(),
+            ])}
+          </div>
+        );
+      }
     },
 
     renderSubOptionsList() {
